@@ -1,0 +1,38 @@
+
+
+<ion-content>
+<div class="background">
+	<pre>
+
+
+
+
+	</pre>
+  <ion-card >
+
+		<ion-card-header>
+			<ion-card-title style="color: black" text-center>Login Form</ion-card-title>
+    </ion-card-header>
+    
+		<ion-card-content >
+			<ion-list style="background:transparent" no-line>
+
+				<ion-item style="background-color: transparent">
+            <ion-label position="floating">Username</ion-label>
+					<ion-input type="text" [(ngModel)] ="user.email"></ion-input>
+        </ion-item>
+        
+				<ion-item>
+            <ion-label position="floating">Password</ion-label>
+					<ion-input type="password" postion="floating" [(ngModel)] ="user.password"></ion-input>
+        </ion-item>
+        
+				
+				<ion-button expand="full" (click) = "fun(user)" color="dark">Log in</ion-button>
+       
+			</ion-list>
+		</ion-card-content>
+	</ion-card>
+
+</div>
+</ion-content>

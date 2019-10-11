@@ -1,38 +1,35 @@
-
-
+<ion-menu disable></ion-menu>
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Beth+Ellen&display=swap');
+  </style>
+<ion-content class="background" padding>
 <ion-content>
-<div class="background">
-	<pre>
+	<div class="container">
+		
+		<div class="login" padding>
+				<div class="logo">
+					<img src="../../assets/japanesse.png" alt="logo">
 
+						<h1 style="color: black;font-family: 'Beth Ellen', cursive;">Japanese Hotel</h1>
 
+				</div>
+			<ion-list style="background: transparent" lines="none" lines="bottom">
+				<ion-item color="none">
+					<ion-label position="floating">Email</ion-label>
+					<ion-input type="email" [(ngModel)] ="user.email"></ion-input>
+				</ion-item>
 
-
-	</pre>
-  <ion-card >
-
-		<ion-card-header>
-			<ion-card-title style="color: black" text-center>Login Form</ion-card-title>
-    </ion-card-header>
-    
-		<ion-card-content >
-			<ion-list style="background:transparent" no-line>
-
-				<ion-item style="background-color: transparent">
-            <ion-label position="floating">Username</ion-label>
-					<ion-input type="text" [(ngModel)] ="user.email"></ion-input>
-        </ion-item>
-        
-				<ion-item>
-            <ion-label position="floating">Password</ion-label>
-					<ion-input type="password" postion="floating" [(ngModel)] ="user.password"></ion-input>
-        </ion-item>
-        
-				
-				<ion-button expand="full" (click) = "fun(user)" color="dark">Log in</ion-button>
-       
+				<ion-item color="none">
+					<ion-label position="floating">Password</ion-label>
+					<ion-input type="password" [(ngModel)] ="user.password"></ion-input>
+				</ion-item>
 			</ion-list>
-		</ion-card-content>
-	</ion-card>
+			<div padding-top>
+				<ion-button expand="full" (click) = "fun(user)">login</ion-button>
+			</div>
+		</div>
+		<div class="pic">
 
-</div>
+		</div>
+	</div>
 </ion-content>

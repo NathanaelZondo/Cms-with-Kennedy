@@ -8,3 +8,27 @@
 img{
     radius:100%
 }
+ion-content.background {
+    --ion-background-color: #2a425a;
+    --ion-text-color: white;
+}
+.pic {
+    text-align: center;
+}
+.pic img {
+    border-radius: 50%;
+}
+ion-toolbar {
+    --ion-background-color: #182838;
+}
+ion-icon {
+    color: #ffffff;
+    // font-size: 24px;
+}
+ion-item {
+    --ion-background-color: transparent;
+    --border-bottom: 1px red
+}
+ion-title {
+    color: #ffffff;
+}

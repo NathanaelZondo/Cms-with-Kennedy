@@ -2,10 +2,13 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Item } from './shopping-item.interface';
-import { Profile } from './user';
+import { Profile } from './luser';
 import { Shotel } from './shotel';
 import { Hotel } from './hotel';
-
+import * as firebase from 'firebase';
+import { Router } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
+import { getLocaleExtraDayPeriodRules } from '@angular/common';
 @Injectable({
   providedIn: 'root'
 })
@@ -39,12 +42,12 @@ export class SlistService {
    
    pref = this.db.list<Profile>('profile/'+this.blast);
   
-    constructor(private db:AngularFireDatabase, public afAuth:AngularFireAuth) {
-  
+    constructor(private db:AngularFireDatabase, public afAuth:AngularFireAuth,public router:Router) {
+     
     }
   toxic;
   
-  
+
   cpro(profile)
   {
     this.toxic =this.afAuth.auth.currentUser.uid.toString();
@@ -77,7 +80,7 @@ export class SlistService {
     this.toxic =this.afAuth.auth.currentUser.uid.toString();
   
     console.log("Damn the console =", this.toxic);
-    this.pref = this.db.list<Profile>('profile/'+this.toxic);
+    this.pref = this.db.list<Profile>('profile/'+this.setxid());
   return this.pref;
   }
   
@@ -88,12 +91,18 @@ export class SlistService {
     this.pref = this.db.list<Profile>('profile/'+this.toxic);
   return this.pref;
   }
-  
-  
-  
+  xid;
+  getxid(xid)
+  {
+ this.xid = xid;
+  }
+  setxid()
+  {
+  return this.xid;
+  }
      getShoppingList()
      {
-       
+      this.shoppingListRef = this.db.list<Item>('pools/'); 
   return this.shoppingListRef;
      }
     
@@ -224,5 +233,22 @@ export class SlistService {
   {
   return this.shoppingListRef1.remove(hotel.key)
   }
+
+
+  logout(userid)
+  {
+    firebase.auth().onAuthStateChanged(user => {
+      if (userid!="") {
+      
+       this.router.navigate(['view-rooms']);
+      } else {
+     
+        firebase.auth().signOut();
+        console.log(firebase.auth().signOut());
+        this.router.navigate(['home']);
+      }
+    })
+ }
   }
+  
   

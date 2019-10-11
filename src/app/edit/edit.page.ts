@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Hotel } from '../hotel';
 import { SlistService } from '../slist.service';
-import { ModalController } from '@ionic/angular';
+import { ToastController, AlertController, ModalController, NavController, LoadingController, MenuController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 @Component({
@@ -16,13 +16,26 @@ export class EditPage implements OnInit {
     
   }
   constructor(public router:Router,
-    public shopping:SlistService,public modal:ModalController) {
+    public shopping:SlistService,public modal:ModalController,public loadingController: LoadingController,public toastCtrl:ToastController) {
       let x =this.shopping.getshotelkey();
       console.log("edit =",x)
+      this.presentLoading();
   }
 
 hotel:Hotel = this.shopping.gethoteldata();
+ionViewDidLoad() {
+  this.presentLoading();
+}
 
+async presentLoading() {
+  const loading = await this.loadingController.create({
+    message: 'Please wait.',
+    duration: 5000
+  });
+  await loading.present();
+
+  console.log('Loading dismissed!');
+}
   
   closemod()
   {
@@ -53,9 +66,20 @@ showmodal3(hotel)
 
 }
 
+async presentToast() {
+  const toast = await this.toastCtrl.create({
+    message: 'Room information updated.',
+    duration: 5000
+  });
+  toast.present();
+}
+
+
+
 save(hotel)
 {
  // console.log(hotel);
+ this.presentToast()
   this.shopping.edithotel(hotel);
   this.router.navigate(['view-rooms']);
 }

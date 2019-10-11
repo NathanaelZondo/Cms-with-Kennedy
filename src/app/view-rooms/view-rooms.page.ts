@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { ToastController, AlertController, ModalController } from '@ionic/angular';
+import { ToastController, AlertController, ModalController, NavController, LoadingController, MenuController } from '@ionic/angular';
 import { SlistService } from '../slist.service';
 import { Observable } from 'rxjs';
 import { Item } from '../shopping-item.interface';
 import { Hotel } from '../hotel';
-import { Profile } from '../user';
+import { Profile } from '../luser';
 import { Shotel } from '../shotel';
 import 'rxjs/add/operator/map';
 import { Router } from '@angular/router';
@@ -27,9 +27,9 @@ ngOnInit()
   {
     
   }
-  constructor(private router:Router,public modal:ModalController,public alertCtrl:AlertController,public toastCtrl:ToastController, public shopping:SlistService) {
+  constructor(private router:Router,public modal:ModalController,public alertCtrl:AlertController,public toastCtrl:ToastController, public shopping:SlistService,public loadingController: LoadingController) {
 
-   
+    this.presentLoading();
 
     this.shoppingList$ = this.shopping.getShoppingList().snapshotChanges().map(changes1=>{
       return changes1.map(c=>({key:c.payload.key,...c.payload.val(),}));
@@ -56,13 +56,21 @@ ngOnInit()
     
     
 
-ionViewDidEnter()
-{
+      ionViewDidLoad() {
+        this.presentLoading();
+      }
+    
+      async presentLoading() {
+        const loading = await this.loadingController.create({
+          message: 'Please wait.',
+          duration: 5000
+        });
+        await loading.present();
+    
+        console.log('Loading dismissed!');
+      }
 
-}
-
-
-
+   
 
 editshop(item)
 {
@@ -165,5 +173,6 @@ delete(hotel)
   this.shopping.delhotel(hotel);
 
 }
+
 }
 

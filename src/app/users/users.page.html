@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title text-center>User Bookings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+              <ion-avatar slot="start">
+                <img src="../../assets/nobody.jpg">
+              </ion-avatar>
+            
+                <ion-list>
+                <ion-item *ngFor = "let item of shoppingList$ | async"  align = "center">           
+        <b><pre>
+        Client:    {{item.name}}&nbsp;{{item.surname}}
+        Room-type: {{item.roomtype}}
+        Adults:    {{item.adults}}, Children:{{item.children}}
+        Check-in:  {{item.checkin}}
+        Check-out: {{item.checkout}}
+        Total Cost:R{{item.total}}
+               </pre></b>
+                      
+                         
+               
+               
+               
+               
+                </ion-item>
+               </ion-list>
+              
+               
+               
+               
+</ion-content>
